@@ -1,7 +1,6 @@
 package com.kani.nytimespopular.modules
 
 import android.app.Application
-import android.content.Context
 import androidx.annotation.NonNull
 import androidx.room.Room
 import com.kani.nytimespopular.data.local.AppDatabase
