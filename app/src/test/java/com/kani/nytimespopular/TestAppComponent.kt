@@ -31,6 +31,6 @@ interface TestAppComponent: AppComponent {
 
     fun inject(app: TestBaseApplication)
 
-    fun inject(test: RepositoryDataTest)
+    fun inject(test: FetchArticlesDataTest)
 
 }

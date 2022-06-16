@@ -7,12 +7,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 import javax.inject.Inject
 
-@RunWith(MockitoJUnitRunner::class)
-class RepositoryDataTest {
+class FetchArticlesDataTest {
 
     @Inject
     lateinit var remoteDataSource: ArticleDataSource
