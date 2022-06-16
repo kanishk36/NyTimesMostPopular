@@ -11,9 +11,11 @@ import com.kani.nytimespopular.data.local.ArticleEntity
 import com.kani.nytimespopular.data.local.ArticleImageEntity
 import com.kani.nytimespopular.data.local.ArticleWithImage
 import com.kani.nytimespopular.data.remote.ArticleApiService
-import com.kani.nytimespopular.data.repository.ArticleRepository
+import com.kani.nytimespopular.data.repository.ArticleDataSource
 import com.kani.nytimespopular.utils.Response
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -24,7 +26,8 @@ class ArticleListViewModel @Inject constructor(
     articleDao: ArticleDao, articleApiService: ArticleApiService
 ): ViewModel() {
 
-    private val articleRepository = ArticleRepository(articleDao, articleApiService)
+    @Inject
+    internal lateinit var articleRepository: ArticleDataSource
 
     private val _articleListData = MutableLiveData<List<ArticleWithImage>>()
     val articleList: LiveData<List<ArticleWithImage>> = _articleListData

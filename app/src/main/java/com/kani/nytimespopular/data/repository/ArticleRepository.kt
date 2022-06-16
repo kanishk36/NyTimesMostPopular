@@ -2,7 +2,6 @@ package com.kani.nytimespopular.data.repository
 
 import com.kani.nytimespopular.data.local.ArticleDao
 import com.kani.nytimespopular.data.local.ArticleEntity
-import com.kani.nytimespopular.data.local.ArticleImageEntity
 import com.kani.nytimespopular.data.local.ArticleWithImage
 import com.kani.nytimespopular.data.remote.ArticleApiResponse
 import com.kani.nytimespopular.data.remote.ArticleApiService
@@ -17,12 +16,11 @@ import kotlinx.coroutines.runBlocking
 
 import javax.inject.Inject
 
-
-class ArticleRepository(
+class ArticleRepository @Inject constructor(
     private val articleDao: ArticleDao,
-    private val articleService: ArticleApiService) {
+    private val articleService: ArticleApiService): ArticleDataSource {
 
-    fun getArticleList(period: Int): Observable<Response<ArticleApiResponse>> {
+    override fun getArticleList(period: Int): Observable<Response<ArticleApiResponse>> {
         return articleService.fetchArticlesByPeriod(period)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -35,7 +33,7 @@ class ArticleRepository(
             .onErrorReturn { throwable -> Response.Error(throwable) }
     }
 
-    fun loadFromDb(): Response<List<ArticleWithImage>> = runBlocking {
+    override fun loadFromDb(): Response<List<ArticleWithImage>> = runBlocking {
         val data = async(Dispatchers.IO) {
             articleDao.getArticleList()
         }
@@ -48,7 +46,7 @@ class ArticleRepository(
         }
     }
 
-    private fun saveArticlesIntoDb(items: List<ArticleEntity>) = runBlocking {
+    override fun saveArticlesIntoDb(items: List<ArticleEntity>): Unit = runBlocking {
 
         launch(Dispatchers.IO) {
             articleDao.deleteAllArticles()

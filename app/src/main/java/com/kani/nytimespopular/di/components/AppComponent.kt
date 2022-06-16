@@ -3,6 +3,7 @@ package com.kani.nytimespopular.di.components
 import android.app.Application
 import android.content.Context
 import com.kani.nytimespopular.NyPopularApplication
+import com.kani.nytimespopular.di.modules.AppModule
 import com.kani.nytimespopular.di.modules.ArticleServiceModule
 import com.kani.nytimespopular.di.modules.ItemDetailHostActivityModule
 import com.kani.nytimespopular.modules.DbModule
@@ -20,7 +21,8 @@ import dagger.android.support.AndroidSupportInjectionModule
     ItemDetailHostActivityModule::class,
     ArticleServiceModule::class,
     AndroidInjectionModule::class,
-    AndroidSupportInjectionModule::class])
+    AndroidSupportInjectionModule::class,
+    AppModule::class])
 interface AppComponent {
 
     @Component.Builder

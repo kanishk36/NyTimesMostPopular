@@ -1,6 +1,5 @@
 package com.kani.nytimespopular.data.remote
 
-import com.kani.nytimespopular.data.remote.ArticleApiResponse
 import com.kani.nytimespopular.utils.CommonUtils
 import io.reactivex.Observable
 import retrofit2.http.GET
