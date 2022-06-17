@@ -10,7 +10,7 @@ class CustomTestRunner: androidx.test.runner.AndroidJUnitRunner() {
         className: String?,
         context: Context?
     ): Application {
-        return super.newApplication(cl, TestBaseApplication::class.java.name, context)
+        return super.newApplication(cl, AndroidTestApplication::class.java.name, context)
     }
 
 
