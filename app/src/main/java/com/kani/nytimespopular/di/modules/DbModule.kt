@@ -23,7 +23,7 @@ class DbModule {
 
     @ApplicationScope
     @Provides
-    internal fun provideArticleDap(appDatabase: AppDatabase): ArticleDao {
+    internal fun provideArticleDao(appDatabase: AppDatabase): ArticleDao {
         return appDatabase.articleDao()
     }
 
